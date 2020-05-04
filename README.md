@@ -1,7 +1,8 @@
 # get-latest-ssl-tools
 
-This is simple shell script to download latest release of tool.
-Only support linux_amd64
+This is simple shell script to download latest release of tool for RoboCup Small Size League.  
+
+Only support linux_amd64.
 
 ## usage
 
