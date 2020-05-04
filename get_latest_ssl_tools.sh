@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -Ceu
+
 print_usage() {
 
     cat <<- USAGE
@@ -72,5 +74,5 @@ if [ ! "${FOUND_LIST}" = "" ]; then
     exit 0
 fi
 
-wget -q --show-progress "${TARGET_FILE_NAME}" 
+wget -q --show-progress "${TARGET_FILE_NAME}"
 chmod +x "$(basename ${TARGET_FILE_NAME})"
