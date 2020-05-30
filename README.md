@@ -7,7 +7,7 @@ Only support linux_amd64.
 ## usage
 
 ```sh
-$ update_game_tools.sh [OPTION | TARGET]
+$ get_latest_ssl_tools.sh [OPTION | TARGET]
 ```
 
 ### OPTION
@@ -16,6 +16,8 @@ available options are:
 
 - -h / --help
     show this help
+- -a / --all
+    download all of supported TARGET
 
 ### TARGET
 
@@ -29,6 +31,6 @@ available tools are:
 ## example usage
 
 ```sh
-$ ./update_game_tools.sh robocup-ssl/ssl-vision-client
-$ ./update_game_tools.sh gc
+$ ./get_latest_ssl_tools.sh robocup-ssl/ssl-vision-client
+$ ./get_latest_ssl_tools.sh gc
 ```
