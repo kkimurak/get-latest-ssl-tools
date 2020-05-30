@@ -31,11 +31,20 @@ USAGE
     exit 1
 }
 
-if [ "$#" -ne 1 ]; then
+if [ "$#" -lt 1 ]; then
     print_usage "Argment is too many or less"
 fi
 
 TARGET_TOOL_NAME=""
+
+if [ "$#" -ge 2 ]; then
+  for arg in "$@"; do
+    $0 "$arg"
+    echo
+  done
+  exit 0
+fi
+
 case "$1" in
     "-h" \
     | "--help" )
