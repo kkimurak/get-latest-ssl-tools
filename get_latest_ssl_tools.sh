@@ -68,7 +68,7 @@ platform is : linux_amd64
 TARGET_INFO
 
 TARGET_FILE_NAME="$(basename "${TARGET_FILE_URL}")"
-FOUND_LIST="$(find ~/ -name "${TARGET_FILE_NAME}" 2>/dev/null)"
+FOUND_LIST="$(find ~/ -name "${TARGET_FILE_NAME}" 2>/dev/null)" && true
 if [ ! "${FOUND_LIST}" = "" ]; then
     echo "already exist on system. found at:"
     echo "${FOUND_LIST}"
