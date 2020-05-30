@@ -15,6 +15,9 @@ print_usage() {
     available options are:
     - -h / --help
         show this help
+    - -a / --all
+        download all of available tools
+        if this command is passed, all other TARGET will be ignored     
 
     - TARGET
     available tools are:
@@ -62,6 +65,12 @@ case "$1" in
     | "vc" \
     )
         TARGET_TOOL_NAME="robocup-ssl/ssl-vision-client"
+        ;;
+    "--all" \
+    | "-a" )
+        printf "Downlaod all supported tools\n\n"
+        $0 gc vc
+        exit 0
         ;;
     *)
         print_usage "Unexpected argment : $1"
