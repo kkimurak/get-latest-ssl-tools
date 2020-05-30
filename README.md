@@ -2,7 +2,9 @@
 
 This is simple shell script to download latest release of tool for RoboCup Small Size League.  
 
-Only support linux_amd64.
+Supported OS are listed below (additionally POSIX shell also required)
+
+- linux_amd64
 
 ## usage
 
@@ -34,3 +36,15 @@ available tools are:
 $ ./get_latest_ssl_tools.sh robocup-ssl/ssl-vision-client
 $ ./get_latest_ssl_tools.sh gc
 ```
+
+## dependency
+
+This script depends on those tools
+
+- cat (with here-document support)
+- chmod
+- echo
+- find
+- jq
+- rm
+- wget or curl
