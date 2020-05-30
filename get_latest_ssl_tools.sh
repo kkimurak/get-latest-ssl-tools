@@ -9,7 +9,7 @@ print_usage() {
     Only support linux_amd64
 
     usage
-    $ update_game_tools.sh [OPTION | TARGET]
+    $ $(basename $0) [OPTION | TARGET]
 
     - OPTION
     available options are:
@@ -27,8 +27,8 @@ print_usage() {
       aliases : ssl-vision-client, vision-client, vc
 
     example
-    $ ./update_game_tools.sh robocup-ssl/ssl-vision-client
-    $ ./update_game_tools.sh gc
+    $ $(basename $0) robocup-ssl/ssl-vision-client
+    $ $(basename $0) gc
 USAGE
 
     exit 1
