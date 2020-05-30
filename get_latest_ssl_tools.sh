@@ -3,7 +3,7 @@
 set -Ceu
 
 print_usage() {
-
+    echo $1
     cat <<- USAGE
     This script will download latest release of tool that you specified.
     Only support linux_amd64
@@ -55,7 +55,7 @@ case "$1" in
         TARGET_TOOL_NAME="robocup-ssl/ssl-vision-client"
         ;;
     *)
-        print_usage "Unexpected argment"
+        print_usage "Unexpected argment : $1"
         ;;
 esac
 
