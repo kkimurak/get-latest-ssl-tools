@@ -25,7 +25,7 @@ available tools are:
 
 - [robocup-ssl/ssl-game-controller](https://github.com/robocup-ssl/ssl-game-controller)  
     aliases : ssl-game-controller, game-controller, gc
-- [robocup-ssl/ssl-vision-client](https://github.com/robocup-ssl/ssl-game-controller)  
+- [robocup-ssl/ssl-vision-client](https://github.com/robocup-ssl/ssl-vision-client)  
     aliases : ssl-vision-client, vision-client, vc
 
 ## example usage
