@@ -16,10 +16,10 @@ $ get_latest_ssl_tools.sh [OPTION | TARGET]
 
 available options are:
 
-- -h / --help
-    show this help
-- -a / --all
-    download all of supported TARGET
+- -h / --help  
+show this help
+- -a / --all  
+download all of supported TARGET
 
 ### TARGET
 
