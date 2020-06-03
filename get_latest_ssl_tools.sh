@@ -77,7 +77,21 @@ case "$1" in
         ;;
 esac
 
-TARGET_FILE_URL="$(curl -Ss https://api.github.com/repos/${TARGET_TOOL_NAME}/releases | jq -r '.[0].assets[] | select(.name | test("linux_amd64")) | .browser_download_url')"
+TARGET_PLATFORM="";
+case "$(uname -s)" in
+    "Linux")
+        TARGET_PLATFORM="linux_amd64"
+        ;;
+    "Darwin")
+        TARGET_PLATFORM="darwin_amd64"
+        ;;
+    *)
+        echo "This system is not supported"
+        exit 1
+        ;;
+esac
+
+TARGET_FILE_URL="$(curl -Ss https://api.github.com/repos/${TARGET_TOOL_NAME}/releases | jq -r --arg TARGET_PLATFORM "${TARGET_PLATFORM}" '.[0].assets[] | select(.name | test($TARGET_PLATFORM)) | .browser_download_url')"
 TARGET_TOOL_VERSION="$(basename ${TARGET_FILE_URL} | cut -d '_' -f 2)"
 cat << TARGET_INFO
 Download latest release of ${TARGET_TOOL_NAME}
