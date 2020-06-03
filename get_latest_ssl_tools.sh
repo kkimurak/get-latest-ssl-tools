@@ -77,6 +77,17 @@ case "$1" in
         ;;
 esac
 
+case "$(uname -m)" in
+    "amd64"\
+    | "x86_64")
+        echo "System architecture is $(uname -m) : supported"
+        ;;
+    *)
+        echo "This system is not seems to be 64bit so not supported"
+        exit 1
+        ;;
+esac
+
 TARGET_PLATFORM="";
 case "$(uname -s)" in
     "Linux")
