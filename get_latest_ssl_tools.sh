@@ -107,7 +107,7 @@ TARGET_TOOL_VERSION="$(basename ${TARGET_FILE_URL} | cut -d '_' -f 2)"
 cat << TARGET_INFO
 Download latest release of ${TARGET_TOOL_NAME}
 version is  : ${TARGET_TOOL_VERSION}
-platform is : linux_amd64
+platform is : ${TARGET_PLATFORM}
 TARGET_INFO
 
 TARGET_FILE_NAME="$(basename "${TARGET_FILE_URL}")"
