@@ -97,8 +97,12 @@ case "$(uname -s)" in
         TARGET_PLATFORM="darwin_amd64"
         ;;
     *)
-        echo "This system is not supported"
-        exit 1
+        if [ "${OS}" = "Windows_NT" ]; then
+            TARGET_PLATFORM="windows_amd64"
+        else
+            echo "This system is not supported"
+            exit 1
+        fi
         ;;
 esac
 
