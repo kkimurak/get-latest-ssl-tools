@@ -42,7 +42,7 @@ TARGET_TOOL_NAME=""
 
 if [ "$#" -ge 2 ]; then
   for arg in "$@"; do
-    $0 "$arg"
+    env sh $0 "$arg"
     echo
   done
   exit 0
@@ -69,7 +69,7 @@ case "$1" in
     "--all" \
     | "-a" )
         printf "Downlaod all supported tools\n\n"
-        $0 gc vc
+        env sh $0 gc vc
         exit 0
         ;;
     *)
