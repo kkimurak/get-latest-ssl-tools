@@ -5,6 +5,8 @@ This is simple shell script to download latest release of tool for RoboCup Small
 Supported OS are listed below (additionally POSIX shell also required)
 
 - linux_amd64
+- darwin_amd64
+- windows_amd64
 
 ## usage
 
