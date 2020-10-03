@@ -34,20 +34,18 @@ USAGE
     exit 1
 }
 
-if [ "$#" -lt 1 ]; then
-    print_usage "Argment is too many or less"
-fi
-
 TARGET_TOOL_NAME=""
 
+# support multiple target in argments : split argment and run script itself for each
 if [ "$#" -ge 2 ]; then
-  for arg in "$@"; do
-    env sh $0 "$arg"
-    echo
-  done
-  exit 0
+    for arg in "$@"; do
+        env sh $0 "$arg"
+        echo
+    done
+    exit 0
 fi
 
+# process argment
 case "$1" in
     "-h" \
     | "--help" )
@@ -77,6 +75,7 @@ case "$1" in
         ;;
 esac
 
+# check architecture
 case "$(uname -m)" in
     "amd64"\
     | "x86_64")
@@ -88,6 +87,7 @@ case "$(uname -m)" in
         ;;
 esac
 
+# check OS
 TARGET_PLATFORM="";
 case "$(uname -s)" in
     "Linux")
@@ -106,6 +106,7 @@ case "$(uname -s)" in
         ;;
 esac
 
+# set up target and its URL, then display it
 TARGET_FILE_URL="$(curl -Ss https://api.github.com/repos/${TARGET_TOOL_NAME}/releases | jq -r --arg TARGET_PLATFORM "${TARGET_PLATFORM}" '.[0].assets[] | select(.name | test($TARGET_PLATFORM)) | .browser_download_url')"
 TARGET_TOOL_VERSION="$(basename ${TARGET_FILE_URL} | cut -d '_' -f 2)"
 cat << TARGET_INFO
@@ -114,6 +115,7 @@ version is  : ${TARGET_TOOL_VERSION}
 platform is : ${TARGET_PLATFORM}
 TARGET_INFO
 
+# find existing binary to avoid duplicate
 TARGET_FILE_NAME="$(basename "${TARGET_FILE_URL}")"
 FOUND_LIST="$(find ~/ -name "${TARGET_FILE_NAME}" 2>/dev/null)" && true
 if [ ! "${FOUND_LIST}" = "" ]; then
@@ -122,6 +124,9 @@ if [ ! "${FOUND_LIST}" = "" ]; then
     exit 0
 fi
 
+# setup handler to delete temporal file
 trap 'rm -f "${TARGET_FILE_NAME}"; echo ;echo "Process killed. deleted downloading file $(basename ${TARGET_FILE_URL})";' 2
+
+# start downloading and make it executable
 wget -q --show-progress "${TARGET_FILE_URL}"
 chmod +x "${TARGET_FILE_NAME}"
