@@ -117,12 +117,30 @@ TARGET_INFO
 
 # find existing binary to avoid duplicate
 TARGET_FILE_NAME="$(basename "${TARGET_FILE_URL}")"
-FOUND_LIST="$(find ~/ -name "${TARGET_FILE_NAME}" 2>/dev/null)" && true
-if [ ! "${FOUND_LIST}" = "" ]; then
+EXACT_MATCH_LIST="$(find ~/ -name "${TARGET_FILE_NAME}" 2>/dev/null)" && true
+if [ ! "${EXACT_MATCH_LIST}" = "" ]; then
     echo "already exist on system. found at:"
-    echo "${FOUND_LIST}"
+    echo "${EXACT_MATCH_LIST}"
     exit 0
 fi
+
+# find older version and ask to delete before downloading latest one
+EXEC_NAME_SIMPLIFIED="$(echo "${TARGET_FILE_NAME}" | cut -d "_" -f 1)"
+OLDER_LIST="$(find ~/ -executable -type f -name "${EXEC_NAME_SIMPLIFIED}*")"
+for older_file in ${OLDER_LIST}; do
+    printf "Older version of target found:\n"
+    du -h "${older_file}"
+    printf "Do you want to remove it?\nThis will run 'rm' command, so cannot be undone. [y/N] "
+    read -r Y_N
+    case "$(echo "${Y_N}" | tr "[:upper:]" "[:lower:]")" in
+        "y" | "yes")
+            rm "${older_file}" && printf "successfully removed.\n\n"
+            ;;
+        *)
+            printf "skipped...\n\n"
+            ;;
+    esac
+done
 
 # setup handler to delete temporal file
 trap 'rm -f "${TARGET_FILE_NAME}"; echo ;echo "Process killed. deleted downloading file $(basename ${TARGET_FILE_URL})";' 2
