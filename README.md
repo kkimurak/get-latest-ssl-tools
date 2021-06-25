@@ -20,7 +20,7 @@ available options are:
 
 - -h / --help  
 show this help
-- -a / --all  
+- -a / --all / all  
 download all of supported TARGET
 
 ### TARGET
@@ -29,8 +29,10 @@ available tools are:
 
 - [robocup-ssl/ssl-game-controller](https://github.com/robocup-ssl/ssl-game-controller)  
     aliases : ssl-game-controller, game-controller, gc
-- [robocup-ssl/ssl-vision-client](https://github.com/robocup-ssl/ssl-vision-client)  
+- [robocup-ssl/ssl-vision-client::vision-client](https://github.com/robocup-ssl/ssl-vision-client)  
     aliases : ssl-vision-client, vision-client, vc
+- [robocup-ssl/ssl-vision-client::vision-cli](https://github.com/robocup-ssl/ssl-vision-client)  
+    aliases : ssl-vision-cli, vision-client, vcli
 
 ## example usage
 
