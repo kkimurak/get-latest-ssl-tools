@@ -35,6 +35,8 @@ USAGE
 }
 
 TARGET_TOOL_NAME=""
+TARGET_TOOL_REPOSITORY=""
+TARGET_TOOL_REPOSITORY_API_ROOT=""
 
 # support multiple target in argments : split argment and run script itself for each
 if [ "$#" -ge 2 ]; then
@@ -60,14 +62,19 @@ case "$1" in
     | "ssl-game-controller" \
     | "game-controller" \
     | "gc")
-        TARGET_TOOL_NAME="robocup-ssl/ssl-game-controller"
+        TARGET_TOOL_REPOSITORY_API_ROOT="https://api.github.com/repos/"
+        TARGET_TOOL_REPOSITORY="robocup-ssl/ssl-game-controller"
+        TARGET_TOOL_NAME="ssl-game-controller"
         ;;
     "robocup-ssl/ssl-vision-client" \
     | "ssl-vision-client" \
     | "vision-client" \
     | "vc" \
     )
-        TARGET_TOOL_NAME="robocup-ssl/ssl-vision-client"
+        TARGET_TOOL_REPOSITORY_API_ROOT="https://api.github.com/repos/"
+        TARGET_TOOL_REPOSITORY="robocup-ssl/ssl-vision-client"
+        TARGET_TOOL_NAME="ssl-vision-client"
+        ;;
         ;;
     "--all" \
     | "-a" \
@@ -114,7 +121,10 @@ case "$(uname -s)" in
 esac
 
 # set up target and its URL, then display it
-TARGET_FILE_URL="$(curl -Ss https://api.github.com/repos/${TARGET_TOOL_NAME}/releases | jq -r --arg TARGET_PLATFORM "${TARGET_PLATFORM}" '.[0].assets[] | select(.name | test($TARGET_PLATFORM)) | .browser_download_url')"
+TARGET_FILE_URL="$(curl -Ss "${TARGET_TOOL_REPOSITORY_API_ROOT}${TARGET_TOOL_REPOSITORY}/releases" \
+    | jq -r --arg TARGET_PLATFORM "${TARGET_PLATFORM}" --arg TARGET_TOOL_NAME "${TARGET_TOOL_NAME}_" \
+        '.[0].assets[] | select(.name | test($TARGET_TOOL_NAME)) | select(.name | test($TARGET_PLATFORM)) | .browser_download_url')"
+
 TARGET_TOOL_VERSION="$(basename ${TARGET_FILE_URL} | cut -d '_' -f 2)"
 cat << TARGET_INFO
 Download latest release of ${TARGET_TOOL_NAME}
@@ -133,7 +143,7 @@ fi
 
 # find older version and ask to delete before downloading latest one
 EXEC_NAME_SIMPLIFIED="$(echo "${TARGET_FILE_NAME}" | cut -d "_" -f 1)"
-OLDER_LIST="$(find ~/ -executable -type f -name "${EXEC_NAME_SIMPLIFIED}*")"
+OLDER_LIST="$(find ~/ -executable -type f -name "${EXEC_NAME_SIMPLIFIED}_*")"
 for older_file in ${OLDER_LIST}; do
     printf "Older version of target found:\n"
     du -h "${older_file}"
