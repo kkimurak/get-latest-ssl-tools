@@ -23,9 +23,10 @@ print_usage() {
     available tools are:
     - robocup-ssl/ssl-game-controller
       aliases : ssl-game-controller, game-controller, gc
-    - robocup-ssl/ssl-vision-client
+    - robocup-ssl/ssl-vision-client::ssl-vision-client
       aliases : ssl-vision-client, vision-client, vc
-
+    - robocup-ssl/ssl-vision-client::ssl-vision-cli
+      aliases : ssl-vision-cli, vision-cli, vcli
     example
     $ $(basename $0) robocup-ssl/ssl-vision-client
     $ $(basename $0) gc
@@ -75,6 +76,14 @@ case "$1" in
         TARGET_TOOL_REPOSITORY="robocup-ssl/ssl-vision-client"
         TARGET_TOOL_NAME="ssl-vision-client"
         ;;
+    "robocup-ssl/ssl-vision-cli" \
+    | "ssl-vision-cli" \
+    | "vision-cli" \
+    | "vcli" \
+    )
+        TARGET_TOOL_REPOSITORY_API_ROOT="https://api.github.com/repos/"
+        TARGET_TOOL_REPOSITORY="robocup-ssl/ssl-vision-client"
+        TARGET_TOOL_NAME="ssl-vision-cli"
         ;;
     "--all" \
     | "-a" \
