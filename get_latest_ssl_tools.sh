@@ -15,7 +15,7 @@ print_usage() {
     available options are:
     - -h / --help
         show this help
-    - -a / --all
+    - -a / --all / all
         download all of available tools
         if this command is passed, all other TARGET will be ignored     
 
@@ -70,9 +70,11 @@ case "$1" in
         TARGET_TOOL_NAME="robocup-ssl/ssl-vision-client"
         ;;
     "--all" \
-    | "-a" )
+    | "-a" \
+    | "all" \
+    )
         printf "Downlaod all supported tools\n\n"
-        env sh $0 gc vc
+        env sh "$0" gc vc
         exit 0
         ;;
     *)
