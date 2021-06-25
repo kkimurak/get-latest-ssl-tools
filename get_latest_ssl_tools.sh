@@ -3,7 +3,7 @@
 set -Ceu
 
 print_usage() {
-    echo $1
+    echo "$0"
     cat <<- USAGE
     This script will download latest release of tool that you specified.
     Only support linux_amd64
@@ -15,7 +15,7 @@ print_usage() {
     available options are:
     - -h / --help
         show this help
-    - -a / --all
+    - -a / --all / all
         download all of available tools
         if this command is passed, all other TARGET will be ignored     
 
@@ -45,6 +45,11 @@ if [ "$#" -ge 2 ]; then
     exit 0
 fi
 
+if [ "$#" -eq 0 ]; then
+    print_usage
+    exit 0
+fi
+
 # process argment
 case "$1" in
     "-h" \
@@ -65,9 +70,11 @@ case "$1" in
         TARGET_TOOL_NAME="robocup-ssl/ssl-vision-client"
         ;;
     "--all" \
-    | "-a" )
+    | "-a" \
+    | "all" \
+    )
         printf "Downlaod all supported tools\n\n"
-        env sh $0 gc vc
+        env sh "$0" gc vc
         exit 0
         ;;
     *)
