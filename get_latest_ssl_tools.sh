@@ -3,7 +3,7 @@
 set -Ceu
 
 print_usage() {
-    echo $1
+    echo "$0"
     cat <<- USAGE
     This script will download latest release of tool that you specified.
     Only support linux_amd64
@@ -42,6 +42,11 @@ if [ "$#" -ge 2 ]; then
         env sh $0 "$arg"
         echo
     done
+    exit 0
+fi
+
+if [ "$#" -eq 0 ]; then
+    print_usage
     exit 0
 fi
 
