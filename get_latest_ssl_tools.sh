@@ -90,7 +90,7 @@ case "$1" in
     | "all" \
     )
         printf "Downlaod all supported tools\n\n"
-        env sh "$0" gc vc
+        env sh "$0" gc vc vcli
         exit 0
         ;;
     *)
