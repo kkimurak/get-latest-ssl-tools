@@ -27,6 +27,8 @@ print_usage() {
       aliases : ssl-vision-client, vision-client, vc
     - robocup-ssl/ssl-vision-client::ssl-vision-cli
       aliases : ssl-vision-cli, vision-cli, vcli
+    - robocup-ssl/ssl-remote-control
+      aliases : ssl-remote-control, remote-control, rc
     example
     $ $(basename $0) robocup-ssl/ssl-vision-client
     $ $(basename $0) gc
@@ -85,12 +87,21 @@ case "$1" in
         TARGET_TOOL_REPOSITORY="robocup-ssl/ssl-vision-client"
         TARGET_TOOL_NAME="ssl-vision-cli"
         ;;
+    "robocup-ssl/ssl-remote-control" \
+    | "ssl-remote-control" \
+    | "remote-control" \
+    | "rc" \
+    )
+        TARGET_TOOL_REPOSITORY_API_ROOT="https://api.github.com/repos/"
+        TARGET_TOOL_REPOSITORY="robocup-ssl/ssl-remote-control"
+        TARGET_TOOL_NAME="ssl-remote-control"
+        ;;
     "--all" \
     | "-a" \
     | "all" \
     )
         printf "Downlaod all supported tools\n\n"
-        env sh "$0" gc vc vcli
+        env sh "$0" gc vc vcli rc
         exit 0
         ;;
     *)

@@ -33,6 +33,8 @@ available tools are:
     aliases : ssl-vision-client, vision-client, vc
 - [robocup-ssl/ssl-vision-client::vision-cli](https://github.com/robocup-ssl/ssl-vision-client)  
     aliases : ssl-vision-cli, vision-client, vcli
+- [robocup-ssl/ssl-remote-control](https://github.com/robocup-ssl/ssl-remote-control)  
+    aliases : ssl-remote-control, remote-control, rc
 
 ## example usage
 
