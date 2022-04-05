@@ -163,7 +163,7 @@ fi
 
 # find older version and ask to delete before downloading latest one
 EXEC_NAME_SIMPLIFIED="$(echo "${TARGET_FILE_NAME}" | cut -d "_" -f 1)"
-OLDER_LIST="$(find ~/ -executable -type f -name "${EXEC_NAME_SIMPLIFIED}_*")"
+OLDER_LIST="$(find ~/ -path "$HOME/.*" -prune -executable -type f -name "${EXEC_NAME_SIMPLIFIED}_*")"
 for older_file in ${OLDER_LIST}; do
     printf "Older version of target found:\n"
     du -h "${older_file}"
